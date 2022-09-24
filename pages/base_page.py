@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from tests import config
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.select import Select
 
 
 class BasePage():
@@ -27,6 +28,10 @@ class BasePage():
 
     def _type(self, locator, input_text):
         self._find(locator).send_keys(input_text)
+
+    def _type_and_click2(self, locator, input_text):
+        self._click(locator)
+        self._find(locator).send_keys(input_text).send_keys(Keys.ENTER)
 
     def _is_displayed(self, locator, timeout=0):
         if timeout > 0:
@@ -65,6 +70,25 @@ class BasePage():
         except TimeoutException:
             return False
         return True
+
+    def _select(self, locator, input_select):
+        select = Select(self._find(locator))
+        select.select_by_visible_text(input_select)
+
+    def _click_inarow2(self, locator, timeout=0):
+        try:
+            wait = WebDriverWait(self.driver, timeout)
+            wait.until(
+                expected_conditions.visibility_of_element_located(
+                    (locator['by'], locator['value'])))
+            self._find(locator).click()
+
+        except TimeoutException:
+            return False
+        return True
+
+
+
 
 
 

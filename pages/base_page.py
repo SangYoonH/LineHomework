@@ -3,6 +3,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from tests import config
+from selenium.webdriver.common.keys import Keys
 
 
 class BasePage():
@@ -20,6 +21,9 @@ class BasePage():
 
     def _click(self, locator):
         self._find(locator).click()
+
+    def _click2(self, locator):
+        self._find(locator).send_keys(Keys.ENTER)
 
     def _type(self, locator, input_text):
         self._find(locator).send_keys(input_text)
@@ -49,6 +53,19 @@ class BasePage():
         except TimeoutException:
             return False
         return True
+
+    def _click_inarow(self, locator, timeout=0):
+        try:
+            wait = WebDriverWait(self.driver, timeout)
+            wait.until(
+                expected_conditions.visibility_of_element_located(
+                    (locator['by'], locator['value'])))
+            self._find(locator).send_keys(Keys.ENTER)
+
+        except TimeoutException:
+            return False
+        return True
+
 
 
 

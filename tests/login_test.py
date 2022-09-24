@@ -10,7 +10,12 @@ def login(driver):
 
 def test_valid_credentials(login):
     login.with_(config.valid_email, config.valid_password)
-    assert login.dashboard_page_present()
+    assert login.login_success_check()
+    assert login.goto_customers_page()
+
+
+
+
 #
 #
 # def test_invalid_credentials(login):

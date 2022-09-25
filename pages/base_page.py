@@ -59,6 +59,16 @@ class BasePage():
             return False
         return True
 
+    def _cannot_get_title(self, locator, timeout=0):
+        try:
+            wait = WebDriverWait(self.driver, timeout)
+            wait.until(
+                expected_conditions.title_contains(
+                    (locator['value'])))
+        except TimeoutException:
+            return True
+        return False
+
     def _click_inarow(self, locator, timeout=0):
         try:
             wait = WebDriverWait(self.driver, timeout)
@@ -86,6 +96,27 @@ class BasePage():
         except TimeoutException:
             return False
         return True
+
+    def _is_not_displayed(self, locator, timeout=0):
+        if timeout > 0:
+            try:
+                wait = WebDriverWait(self.driver, timeout)
+                wait.until(
+                    expected_conditions.visibility_of_element_located(
+                        (locator['by'], locator['value'])))
+
+            except TimeoutException:
+                return True
+            return False
+        else:
+            try:
+                return self._find(locator).is_displayed()
+            except NoSuchElementException:
+                return True
+
+    def _reset(self, locator):
+        self._find(locator).clear()
+
 
 
 

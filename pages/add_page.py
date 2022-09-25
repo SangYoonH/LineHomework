@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common import keys
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.alert import Alert
 from pages.base_page import BasePage
@@ -9,7 +8,7 @@ import sys
 sys.path.append(sys.path[0] + "../../../")
 
 
-class CustomersPage(BasePage):
+class AddPage(BasePage):
     _username_input = {"by": By.NAME, "value": "email"}
     _password_input = {"by": By.NAME, "value": "password"}
     _submit_button = {"by": By.CSS_SELECTOR, "value": "button"}
@@ -34,9 +33,9 @@ class CustomersPage(BasePage):
     _status_select = {"by": By.NAME, "value": "status"}
     _currency_select = {"by": By.NAME, "value": "currency"}
     _update_button = {"by": By.XPATH, "value": '//button[text()=" Update Settings"]'}
-    _table_tag = {"by": By.XPATH,
-                  "value": '//*[@id="layoutDrawer_content"]/main/div/div[1]/div/div[1]/div[2]/table'}
-
+    _table_tag = {"by": By.CSS_SELECTOR,
+                  "value": '#layoutDrawer_content > main > div > div.xcrud > div > div.xcrud-ajax > div.xcrud-list-container > table'}
+    _alert_danger_messsage = {"by": By.CSS_SELECTOR, "value": ".alert.alert-danger"}
 
     def __init__(self, driver):
         self.driver = driver
@@ -47,6 +46,7 @@ class CustomersPage(BasePage):
         self._type(self._username_input, username)
         self._type(self._password_input, password)
         self._click(self._submit_button)
+
 
     def login_success_check(self):
         return self._get_title(self._success_message, config.login_success_timeout)
@@ -60,7 +60,13 @@ class CustomersPage(BasePage):
         self._click(self._add_button)
         return self._get_title(self._add_customer_page_title, config.add_customer_page_timeout)
 
-    def insert_valid_data(self, firstname, lastname, email, password, mobile,
+    def is_customers_page(self):
+        return self._get_title(self._customers_page_title, config.login_success_timeout)
+
+    def is_not_customers_page(self):
+        return self._cannot_get_title(self._customers_page_title, 1)
+
+    def insert_data(self, firstname, lastname, email, password, mobile,
                           country, address1, address2, status, currency, balance):
         self._type(self._firstname_input, firstname)
         self._type(self._lastname_input, lastname)
@@ -77,8 +83,7 @@ class CustomersPage(BasePage):
         self._type(self._setting_balance, balance)
         self._click(self._update_button)
 
-    def is_customers_page(self):
-        return self._get_title(self._customers_page_title, config.login_success_timeout)
+        return True
 
     def is_firstname_inserted(self, firstname):
         _table = self._find(self._table_tag)
@@ -155,7 +160,9 @@ class CustomersPage(BasePage):
             td = tr.find_elements(By.TAG_NAME, "td")
             if td[4].text == email:
                 td[9].find_elements(by=By.TAG_NAME, value="a")[1].click()
+
                 Alert(self.driver).accept()
+                self.is_customers_page()
                 return True
 
 
@@ -172,6 +179,14 @@ class CustomersPage(BasePage):
         # self._click(self._edit_button)
         # self._find(self._firstname_input)
         return 1
+
+    def alert_danger_message_present(self):
+         return self._is_displayed(self._alert_danger_messsage, 1)
+
+    def alert_danger_message_not_present(self):
+         return self._is_not_displayed(self._alert_danger_messsage, 1)
+
+
 
 
 

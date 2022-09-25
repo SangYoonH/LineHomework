@@ -11,7 +11,7 @@ def delete(driver):
     delete_object._visit("https://phptravels.net/api/admin/accounts/customers/")
     delete_object.delete_input_data(config.valid_email_address)
 
-
+@pytest.mark.order(11)
 def test_delete_customer(delete):
     delete.with_(config.valid_username, config.valid_password)
     assert delete.login_success_check()

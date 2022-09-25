@@ -9,7 +9,7 @@ def add(driver):
     add_object = add_page.AddPage(driver)
     return add_object
 
-
+@pytest.mark.order(3)
 def test_missing_data_add_customer(add):
     add.with_(config.valid_username, config.valid_password)
     assert add.login_success_check()

@@ -14,10 +14,11 @@ class CustomerPage(BasePage):
     _submit_button = {"by": By.CSS_SELECTOR, "value": "button"}
     _success_message = {"value": "Dashboard"}
     _login_page_title = {"value": "Login"}
-    _accounts_button = {"by": By.XPATH, "value": '//*[@id="drawerAccordion"]/div/div/a[6]'}
+    _accounts_button = {"by": By.CSS_SELECTOR, "value": '#drawerAccordion > div > div > a:nth-child(10)'}
     _customers_button = {"by": By.LINK_TEXT, "value": "Customers"}
     _customers_page_title = {"value": "Customers"}
-    _add_button = {"by": By.XPATH, "value": '//button[text()=" Add"]'}
+    _add_button = {"by": By.CSS_SELECTOR,
+                   "value": '#layoutDrawer_content > main > div > header > div > div > div.col-12.col-md-auto.flex-shrink-0 > form > button'}
     _add_customer_page_title = {"value": "Add Customer"}
     _firstname_input = {"by": By.NAME, "value": "fname"}
     _lastname_input = {"by": By.NAME, "value": "lname"}

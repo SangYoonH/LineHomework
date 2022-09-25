@@ -14,10 +14,10 @@ class AddPage(BasePage):
     _submit_button = {"by": By.CSS_SELECTOR, "value": "button"}
     _success_message = {"value": "Dashboard"}
     _login_page_title = {"value": "Login"}
-    _accounts_button = {"by": By.XPATH, "value": '//*[@id="drawerAccordion"]/div/div/a[6]'}
+    _accounts_button = {"by": By.CSS_SELECTOR, "value": '#drawerAccordion > div > div > a:nth-child(10)'}
     _customers_button = {"by": By.LINK_TEXT, "value": "Customers"}
     _customers_page_title = {"value": "Customers"}
-    _add_button = {"by": By.XPATH, "value": '//button[text()=" Add"]'}
+    _add_button = {"by": By.CSS_SELECTOR, "value": '#layoutDrawer_content > main > div > header > div > div > div.col-12.col-md-auto.flex-shrink-0 > form > button'}
     _add_customer_page_title = {"value": "Add Customer"}
     _firstname_input = {"by": By.NAME, "value": "fname"}
     _lastname_input = {"by": By.NAME, "value": "lname"}
@@ -32,7 +32,7 @@ class AddPage(BasePage):
     _sub_checkbox = {"by": By.NAME, "value": "newssub"}
     _status_select = {"by": By.NAME, "value": "status"}
     _currency_select = {"by": By.NAME, "value": "currency"}
-    _update_button = {"by": By.XPATH, "value": '//button[text()=" Update Settings"]'}
+    _update_button = {"by": By.CSS_SELECTOR, "value": '#layoutDrawer_content > main > div > form > div > div.col-lg-8 > div > div > div.text-end > button'}
     _table_tag = {"by": By.CSS_SELECTOR,
                   "value": '#layoutDrawer_content > main > div > div.xcrud > div > div.xcrud-ajax > div.xcrud-list-container > table'}
     _alert_danger_messsage = {"by": By.CSS_SELECTOR, "value": ".alert.alert-danger"}

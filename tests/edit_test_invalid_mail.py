@@ -11,7 +11,7 @@ def edit(driver):
     edit_object._visit("https://phptravels.net/api/admin/accounts/customers/")
     edit_object.delete_input_data(config.valid_email_address)
 
-
+@pytest.mark.order(9)
 def test_invalid_email_edit_customer(edit):
     edit.with_(config.valid_username, config.valid_password)
     assert edit.login_success_check()

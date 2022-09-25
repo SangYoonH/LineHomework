@@ -11,7 +11,7 @@ def add(driver):
     add_object._visit("https://phptravels.net/api/admin/accounts/customers/")
     add_object.delete_input_data(config.valid_email_address)
 
-
+@pytest.mark.order(4)
 def test_invalid_email_add_customer(add):
     add.with_(config.valid_username, config.valid_password)
     assert add.login_success_check()

@@ -114,6 +114,17 @@ class EditPage(BasePage):
         self._reset(self._setting_balance)
         self._type(self._setting_balance, balance)
         self._click(self._update_button)
+        return True
+
+    def edit_email_data(self, value):
+        self._reset(self._email_input)
+        self._type(self._email_input, value)
+        return True
+
+    def edit_password_data(self, value):
+        self._reset(self._new_password_input)
+        self._type(self._new_password_input, value)
+        return True
 
     def is_firstname_inserted(self, firstname):
         _table = self._find(self._table_tag)

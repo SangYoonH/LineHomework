@@ -1,3 +1,4 @@
+#ADD
 baseurl = "https://phptravels.net"
 valid_username = "admin@phptravels.com"
 valid_password = "demoadmin"
@@ -17,13 +18,13 @@ setting_currency = "GBP"
 setting_balance = "100"
 login_success_timeout = 10
 add_customer_page_timeout = 20
-
 missing_firstname = " "
 missing_lastname = " "
 missing_email = " "
 missing_country = " "
 missing_password = " "
 
+#EDIT
 edit_first_name = "Jason"
 edit_last_name = "Kim"
 edit_valid_email_address = "testkim@test.com"
@@ -37,6 +38,7 @@ edit_subscribe_check = "false"
 edit_setting_status = "Enabled"
 edit_setting_currency = "USD"
 edit_setting_balance = "500"
+edit_invalid_email_address = "testkim"
 
 
 

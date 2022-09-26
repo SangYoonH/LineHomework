@@ -85,10 +85,10 @@ class AddPage(BasePage):
         return True
 
     def alert_danger_message_present(self):
-        return self._is_displayed(self._alert_danger_messsage, 1)
+        return self._is_displayed(self._alert_danger_messsage, 3)
 
     def alert_danger_message_not_present(self):
-        return self._is_not_displayed(self._alert_danger_messsage, 1)
+        return self._is_not_displayed(self._alert_danger_messsage, 3)
 
     def is_firstname_inserted(self, firstname):
         _table = self._find(self._table_tag)

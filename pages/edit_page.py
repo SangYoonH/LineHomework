@@ -35,11 +35,8 @@ class EditPage(BasePage):
     _update_button = {"by": By.CSS_SELECTOR, "value": '#layoutDrawer_content > main > div > form > div > div.col-lg-8 > div > div > div.text-end > button'}
     _table_tag = {"by": By.CSS_SELECTOR,
                    "value": '#layoutDrawer_content > main > div > div.xcrud > div > div.xcrud-ajax > div.xcrud-list-container > table'}
-    # _table_tag = {"by": By.TAG_NAME, "value": "table"}
     _alert_danger_messsage = {"by": By.CSS_SELECTOR, "value": ".alert.alert-danger"}
     _update_page_title = {"value": "Update Customer"}
-
-
 
     def __init__(self, driver):
         self.driver = driver
@@ -51,14 +48,11 @@ class EditPage(BasePage):
         self._type(self._password_input, password)
         self._click(self._submit_button)
 
-
     def login_success_check(self):
         return self._get_title(self._success_message, config.login_success_timeout)
 
     def goto_customers_page(self):
-
-        self._click2(self._accounts_button)
-        self._click_inarow(self._customers_button, config.login_success_timeout)
+        self._visit(config.testpage_url)
         return self._get_title(self._customers_page_title, config.login_success_timeout)
 
     def goto_add_page(self):
@@ -218,10 +212,10 @@ class EditPage(BasePage):
                 return True
 
     def alert_danger_message_present(self):
-         return self._is_displayed(self._alert_danger_messsage, 1)
+         return self._is_displayed(self._alert_danger_messsage, 3)
 
     def alert_danger_message_not_present(self):
-         return self._is_not_displayed(self._alert_danger_messsage, 1)
+         return self._is_not_displayed(self._alert_danger_messsage, 3)
 
 
 

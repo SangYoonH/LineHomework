@@ -8,7 +8,7 @@ def edit(driver):
 
     edit_object = edit_page.EditPage(driver)
     yield edit_object
-    edit_object._visit("https://phptravels.net/api/admin/accounts/customers/")
+    edit_object.goto_customers_page()
     edit_object.delete_input_data(config.valid_email_address)
 
 @pytest.mark.order(8)

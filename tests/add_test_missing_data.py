@@ -7,7 +7,9 @@ from . import config
 def add(driver):
 
     add_object = add_page.AddPage(driver)
-    return add_object
+    yield add_object
+    add_object.goto_customers_page()
+    add_object.delete_input_data(config.valid_email_address)
 
 @pytest.mark.order(3)
 def test_missing_data_add_customer(add):
@@ -15,7 +17,7 @@ def test_missing_data_add_customer(add):
     assert add.login_success_check()
     assert add.goto_customers_page()
     assert add.goto_add_page()
-    assert add.insert_data(config.missing_firstname, config.missing_lastname, config.missing_email,
+    add.insert_data(config.missing_firstname, config.missing_lastname, config.missing_email,
                           config.missing_password, config.mobile_number, config.missing_country, config.address_1,
                           config.address_2, config.setting_status,
                           config.setting_currency, config.setting_balance)

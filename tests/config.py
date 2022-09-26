@@ -1,4 +1,5 @@
 #ADD
+testpage_url = "https://phptravels.net/api/admin/accounts/customers/"
 baseurl = "https://phptravels.net"
 valid_username = "admin@phptravels.com"
 valid_password = "demoadmin"

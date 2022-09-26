@@ -52,8 +52,7 @@ class AddPage(BasePage):
         return self._get_title(self._success_message, config.login_success_timeout)
 
     def goto_customers_page(self):
-        self._click(self._accounts_button)
-        self._click_inarow(self._customers_button, config.login_success_timeout)
+        self._visit(config.testpage_url)
         return self._get_title(self._customers_page_title, config.login_success_timeout)
 
     def goto_add_page(self):
@@ -84,6 +83,12 @@ class AddPage(BasePage):
         self._click(self._update_button)
 
         return True
+
+    def alert_danger_message_present(self):
+        return self._is_displayed(self._alert_danger_messsage, 1)
+
+    def alert_danger_message_not_present(self):
+        return self._is_not_displayed(self._alert_danger_messsage, 1)
 
     def is_firstname_inserted(self, firstname):
         _table = self._find(self._table_tag)
@@ -166,25 +171,6 @@ class AddPage(BasePage):
                 return True
 
 
-
-
-    def fetch_edit_button(self, email):
-        _table = self._find(self._table_tag)
-        _tbody = _table.find_element(By.TAG_NAME, "tbody")
-        for tr in _tbody.find_elements(By.TAG_NAME, "tr"):
-            td = tr.find_elements(By.TAG_NAME, "td")
-            if td[4].text == email:
-                _edit_button = td[9].find_elements(by=By.TAG_NAME, value="a")[0]
-
-        # self._click(self._edit_button)
-        # self._find(self._firstname_input)
-        return 1
-
-    def alert_danger_message_present(self):
-         return self._is_displayed(self._alert_danger_messsage, 1)
-
-    def alert_danger_message_not_present(self):
-         return self._is_not_displayed(self._alert_danger_messsage, 1)
 
 
 

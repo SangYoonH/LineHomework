@@ -11,8 +11,7 @@ def delete(driver):
 
     delete_object = customer_page.CustomerPage(driver)
     yield delete_object
-    # delete_object._visit("https://phptravels.net/api/admin/accounts/customers/")
-    # delete_object.delete_input_data(config.valid_email_address)
+    delete_object.delete_input_data(config.valid_email_address)
 
 @pytest.mark.order(12)
 def test_delete_checkbox_customer(delete):

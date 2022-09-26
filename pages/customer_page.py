@@ -54,8 +54,7 @@ class CustomerPage(BasePage):
         return self._get_title(self._success_message, config.login_success_timeout)
 
     def goto_customers_page(self):
-        self._click(self._accounts_button)
-        self._click_inarow(self._customers_button, config.login_success_timeout)
+        self._visit(config.testpage_url)
         return self._get_title(self._customers_page_title, config.login_success_timeout)
 
     def goto_add_page(self):
@@ -67,9 +66,6 @@ class CustomerPage(BasePage):
 
     def is_not_customers_page(self):
         return self._cannot_get_title(self._customers_page_title, 1)
-
-    def is_update_page(self):
-        return self._get_title(self._update_page_title, 1)
 
     def insert_data(self, firstname, lastname, email, password, mobile,
                           country, address1, address2, status, currency, balance):
@@ -117,7 +113,6 @@ class CustomerPage(BasePage):
         self.is_customers_page()
         return True
 
-
     def get_checkbox_and_click(self, email):
         _table = self._find(self._table_tag)
         _tbody = _table.find_element(By.TAG_NAME, "tbody")
@@ -129,10 +124,10 @@ class CustomerPage(BasePage):
                 return True
 
     def alert_danger_message_present(self):
-         return self._is_displayed(self._alert_danger_messsage, 1)
+         return self._is_displayed(self._alert_danger_messsage, 3)
 
     def alert_danger_message_not_present(self):
-         return self._is_not_displayed(self._alert_danger_messsage, 1)
+         return self._is_not_displayed(self._alert_danger_messsage, 3)
 
 
 

@@ -2,6 +2,7 @@ import pytest
 from pages import add_page
 from . import config
 
+
 @pytest.fixture
 def add(driver):
 

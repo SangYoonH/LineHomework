@@ -5,13 +5,14 @@ from . import config
 
 @pytest.fixture
 def add(driver):
+
     add_object = add_page.AddPage(driver)
     yield add_object
     add_object.delete_input_data(config.valid_email_address)
 
 
 @pytest.mark.order(2)
-def test_valid_add_customer(add):
+def test_valid_data_add_customer(add):
     add.with_(config.valid_username, config.valid_password)
     assert add.login_success_check()
     assert add.goto_customers_page()
